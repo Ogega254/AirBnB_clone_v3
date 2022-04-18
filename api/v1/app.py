@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 """
 Flask App that integrates with AirBnB static HTML Template
 """
@@ -35,10 +36,35 @@ def teardown_db(exception):
     after each request, this method calls .close() (i.e. .remove()) on
     the current SQLAlchemy Session
     """
+=======
+'''
+Starts the Flask web application
+'''
+from flask import Flask, make_response, jsonify
+from flask_cors import CORS
+from flasgger import Swagger, swag_from
+from models import storage
+from api.v1.views import app_views
+from os import environ
+app = Flask(__name__)
+app.register_blueprint(app_views)
+CORS(app, origins="0.0.0.0")
+app.config['SWAGGER'] = {
+        'title': 'HBNB API',
+        'description': 'RESTFul API for HBNB'
+    }
+swag = Swagger(app)
+
+
+@app.teardown_appcontext
+def teardown_storage(exception):
+    """Closes storage session"""
+>>>>>>> f733036454d83cd38497b06d25298c5234071b04
     storage.close()
 
 
 @app.errorhandler(404)
+<<<<<<< HEAD
 def handle_404(exception):
     """
     handles 404 errors, in the event that global error handler fails
@@ -92,3 +118,22 @@ if __name__ == "__main__":
     setup_global_errors()
     # start Flask app
     app.run(host=host, port=port)
+=======
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+if __name__ == '__main__':
+    """Runs the app"""
+    if environ.get('HBNB_API_HOST'):
+        host = environ.get('HBNB_API_HOST')
+    else:
+        host = '0.0.0.0'
+
+        if environ.get('HBNB_API_PORT'):
+            port = environ.get('HBNB_API_PORT')
+        else:
+            port = 5000
+
+        app.run(host=host, port=port, threaded=True)
+>>>>>>> f733036454d83cd38497b06d25298c5234071b04
