@@ -156,6 +156,5 @@ No known bugs at this time.
 ## Authors
 1. Gideon Mokaya - [Github](https://github.com/) / [Twitter](https://twitter.com/home)  
 2. Thabang Maloka
-Second part of Airbnb: Joann Vuong
 ## License
 Public Domain. No copy write protection. 
